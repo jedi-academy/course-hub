@@ -35,6 +35,12 @@ presentation framework) or MD (markdown).
 Refer to the `COMP47111 course hub <https://github.com/jedi-academy/learn-4711>`_,
 which is live at http://comp4711.jlparry.com/, for a more complete example.
 
+************
+Contributing
+************
+
+Contribute to this project by makeing a pull request to the develop branch.
+
 ***************
 Project Folders
 ***************
