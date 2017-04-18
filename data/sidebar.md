@@ -1,8 +1,7 @@
 ## Course Instructor
-Jim Parry  
-<jim_parry@bcit.ca>   
-Office hours Tue 12:30-14:20, Wed 11:30-13:20 and Thu 12:30-13:20
-in SW2-124
+{author}  
+<{email}>   
+Office hours Tue 12:30-12:35 and Sat 06:30-07:15 in SW2-456
 
 
 ## Desire2Learn LMS
@@ -21,7 +20,7 @@ in SW2-124
 
 ##Course Related
 [Course outline]({outline})  
-[Slack team](https://comp4711.slack.com) - for notifications & FAQ
+[Slack team](https://{code}.slack.com) - for notifications & FAQ
 <!-- 
 [Project Teams](/display/assignment/assignment1projects)  
 [Assignment 1](/display/assignment/assignment1)  
@@ -30,5 +29,3 @@ in SW2-124
 [Assignment 2](/display/assignment/assignment2)  
 [Assignment 2 FAQ](/display/assignment/assignment2faq)  
 -->
-
-Links above open in the same window, unless you right-click & open them differently.

@@ -12,7 +12,7 @@ organized by "week".
 It should have a unique identifier, its "num" attribute. -->
 <!ELEMENT week (topic,outcomes?, inlab?, (lesson|tutorial|lab|github|assignment|example)*)>
 <!ATTLIST week
-    num CDATA #REQUIRED
+    num CDATA #IMPLIED
   >
 
 <!--- Description of the week's main activity. -->

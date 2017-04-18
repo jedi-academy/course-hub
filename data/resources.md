@@ -1,4 +1,4 @@
-# Resources for COMP4711
+# Resources for COMP1234
 
 ## Editor
 [NetBeans 8](https://netbeans.org/downloads/) One programming IDE  
