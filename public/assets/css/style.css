@@ -49,7 +49,7 @@ body {
     font-weight: normal;
     line-height: 22px;
     height: 50px;
-    background: url('/assets/images/4711.png') left top no-repeat;
+    background: url('/pix/logo.png') left top no-repeat;
     color:white;
 }
 .navbar-default .navbar-brand { color:white}

@@ -21,7 +21,7 @@
 <!--- Link to a formal course outline, if available. -->
 <!ELEMENT outline (#PCDATA)>
 
-<!--- Session identifier for the course content, if appropriate. -->
+<!--- Academic session/term identifier for the course content, if appropriate. -->
 <!ELEMENT session (#PCDATA)>
 
 <!--- Name of the academic insitute, if appropriate. -->
@@ -36,7 +36,7 @@
 <!--- D2L reference code, if appropriate. -->
 <!ELEMENT ou (#PCDATA)>
 
-<!--- A description of the course. One parageph suggested. -->
+<!--- A description of the course. One paragraph suggested. -->
 <!ELEMENT intro (#PCDATA|br)*>
 
 <!--- HTML line break provision. -->
@@ -47,7 +47,7 @@ List of relevant resorces
 -->
 <!ELEMENT resources (resource)*>
 
-<!--- Resource identified, each with a name, link and description. -->
+<!--- Resources identified, each with a name, link and description. -->
 <!ELEMENT resource (name,link,desc)>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT link (#PCDATA)>
