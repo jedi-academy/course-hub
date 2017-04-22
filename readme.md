@@ -3,6 +3,7 @@
 This is a course hub webapp that would suit BCIT courses.
 It is currently used for 
 - [COMP4711 Introduction to Internet Software Development](https://comp4711.jlparry.com)
+- [ACIT 2910 - Projects](https://acit2910.jlparry.com)
 
 The app is a [Flipped LMS](http://hibbittsdesign.org/blog/posts/2015-12-18-flipped-lms-using-an-open-and-collaborative-platform), 
 with deep links into the D2L
