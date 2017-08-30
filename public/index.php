@@ -1,5 +1,4 @@
 <?php
-
 /**
  * CodeIgniter
  *
@@ -54,8 +53,8 @@
  * NOTE: If you change these, also change the error_reporting() code below
  */
 //define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
-define('ENVIRONMENT', (strpos($_SERVER['SERVER_NAME'],'.local') > 0) ? 'development' : 'production');
-	
+define('ENVIRONMENT', (strpos($_SERVER['SERVER_NAME'], '.local') > 0) ? 'development' : 'production');
+
 /*
  * ---------------------------------------------------------------
  * ERROR REPORTING
@@ -66,21 +65,21 @@ define('ENVIRONMENT', (strpos($_SERVER['SERVER_NAME'],'.local') > 0) ? 'developm
  */
 switch (ENVIRONMENT)
 {
-    case 'development':
-        error_reporting(-1);
-        ini_set('display_errors', 1);
-        break;
+	case 'development':
+		error_reporting(-1);
+		ini_set('display_errors', 1);
+		break;
 
-    case 'testing':
-    case 'production':
-        error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
-        ini_set('display_errors', 0);
-        break;
+	case 'testing':
+	case 'production':
+		error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
+		ini_set('display_errors', 0);
+		break;
 
-    default:
-        header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
-        echo 'The application environment is not set correctly.';
-        exit(1); // EXIT_ERROR
+	default:
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'The application environment is not set correctly.';
+		exit(1); // EXIT_ERROR
 }
 
 /*
@@ -181,24 +180,25 @@ $view_folder = '';
 // Set the current directory correctly for CLI requests
 if (defined('STDIN'))
 {
-    chdir(dirname(__FILE__));
+	chdir(dirname(__FILE__));
 }
 
 if (($_temp = realpath($system_path)) !== FALSE)
 {
-    $system_path = $_temp . '/';
-} else
+	$system_path = $_temp . '/';
+}
+else
 {
-    // Ensure there's a trailing slash
-    $system_path = rtrim($system_path, '/') . '/';
+	// Ensure there's a trailing slash
+	$system_path = rtrim($system_path, '/') . '/';
 }
 
 // Is the system path correct?
-if (!is_dir($system_path))
+if ( ! is_dir($system_path))
 {
-    header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
-    echo 'Your system folder path does not appear to be set correctly. Please open the following file and correct this: ' . pathinfo(__FILE__, PATHINFO_BASENAME);
-    exit(3); // EXIT_CONFIG
+	header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+	echo 'Your system folder path does not appear to be set correctly. Please open the following file and correct this: ' . pathinfo(__FILE__, PATHINFO_BASENAME);
+	exit(3); // EXIT_CONFIG
 }
 
 /*
@@ -218,53 +218,68 @@ define('FCPATH', str_replace(SELF, '', __FILE__));
 // Name of the "system folder"
 define('SYSDIR', trim(strrchr(trim(BASEPATH, '/'), '/'), '/'));
 
-// The path to the "application" folder
+// The path to the "application" directory
 if (is_dir($application_folder))
 {
-    if (($_temp = realpath($application_folder)) !== FALSE)
-    {
-        $application_folder = $_temp;
-    }
-
-    define('APPPATH', $application_folder . DIRECTORY_SEPARATOR);
-} else
+	if (($_temp = realpath($application_folder)) !== FALSE)
+	{
+		$application_folder = $_temp;
+	}
+	else
+	{
+		$application_folder = strtr(
+				rtrim($application_folder, '/\\'), '/\\', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR
+		);
+	}
+}
+elseif (is_dir(BASEPATH . $application_folder . DIRECTORY_SEPARATOR))
 {
-    if (!is_dir(BASEPATH . $application_folder . DIRECTORY_SEPARATOR))
-    {
-        header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
-        echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: ' . SELF;
-        exit(3); // EXIT_CONFIG
-    }
-
-    define('APPPATH', BASEPATH . $application_folder . DIRECTORY_SEPARATOR);
+	$application_folder = BASEPATH . strtr(
+					trim($application_folder, '/\\'), '/\\', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR
+	);
+}
+else
+{
+	header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+	echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: ' . SELF;
+	exit(3); // EXIT_CONFIG
 }
 
-// The path to the "views" folder
-if (!is_dir($view_folder))
+define('APPPATH', $application_folder . DIRECTORY_SEPARATOR);
+
+// The path to the "views" directory
+if ( ! isset($view_folder[0]) && is_dir(APPPATH . 'views' . DIRECTORY_SEPARATOR))
 {
-    if (!empty($view_folder) && is_dir(APPPATH . $view_folder . DIRECTORY_SEPARATOR))
-    {
-        $view_folder = APPPATH . $view_folder;
-    } elseif (!is_dir(APPPATH . 'views' . DIRECTORY_SEPARATOR))
-    {
-        header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
-        echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: ' . SELF;
-        exit(3); // EXIT_CONFIG
-    } else
-    {
-        $view_folder = APPPATH . 'views';
-    }
+	$view_folder = APPPATH . 'views';
+}
+elseif (is_dir($view_folder))
+{
+	if (($_temp = realpath($view_folder)) !== FALSE)
+	{
+		$view_folder = $_temp;
+	}
+	else
+	{
+		$view_folder = strtr(
+				rtrim($view_folder, '/\\'), '/\\', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR
+		);
+	}
+}
+elseif (is_dir(APPPATH . $view_folder . DIRECTORY_SEPARATOR))
+{
+	$view_folder = APPPATH . strtr(
+					trim($view_folder, '/\\'), '/\\', DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR
+	);
+}
+else
+{
+	header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+	echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: ' . SELF;
+	exit(3); // EXIT_CONFIG
 }
 
-if (($_temp = realpath($view_folder)) !== FALSE)
-{
-    $view_folder = $_temp . DIRECTORY_SEPARATOR;
-} else
-{
-    $view_folder = rtrim($view_folder, '/\\') . DIRECTORY_SEPARATOR;
-}
+define('VIEWPATH', $view_folder . DIRECTORY_SEPARATOR);
 
-define('VIEWPATH', $view_folder);
 
 /*
  * --------------------------------------------------------------------
@@ -275,5 +290,3 @@ define('VIEWPATH', $view_folder);
  */
 require_once BASEPATH . 'core/CodeIgniter.php';
 
-/* End of file index.php */
-/* Location: ./index.php */
